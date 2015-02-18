@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="lib/sha.js"></script>
+    <script src="lib/angular-resource/angular-resource.js"></script>
+    <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+    <script src="cordova.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/services.js"></script>
+  </head>
+  <body ng-app="starter" ng-controller="AppCtrl">
+
+    <ion-pane>
+      <ion-header-bar class="bar-positive">
+        <h1 class="title">My Twitter Feed</h1>
+      </ion-header-bar>
+      <ion-content class="has-header padding">
+        <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+
+        <div ng-show="home_timeline.length == 0">Loading tweets...</div>
+
+        <div ng-repeat="entry in home_timeline" class="list card">
+          <div class="item item-avatar">
+            <img ng-src="{{entry.user.profile_image_url}}"/>
+            <h2>{{entry.user.name}}</h2>
+            <p>{{correctTimestring(entry.created_at) | date:'medium'}}</p>
+
+            <div class="item item-body">
+              <p ng-bind-html="entry.text"></p>
+              <img ng-if="entry.extended_entities" ng-src="" style="width: 100%;" />
+            </div>
+          </div>
+        </div>
+      </ion-content>
+    </ion-pane>
+  </body>
+</html>
