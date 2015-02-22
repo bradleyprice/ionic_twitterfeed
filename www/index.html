@@ -35,6 +35,8 @@
       <ion-content class="has-header padding">
         <ion-refresher on-refresh="doRefresh()"></ion-refresher>
 
+        <button class="button button-block" ng-if="showUpdateStatus" ng-click="updateStatus()">Post Test Tweet</button>
+
         <div ng-show="home_timeline.length == 0">Loading tweets...</div>
 
         <div ng-repeat="entry in home_timeline" class="list card">
